@@ -102,11 +102,14 @@ public class GUI_Draw extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jSeparator2.setForeground(new java.awt.Color(225, 225, 225));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jSeparator3.setForeground(new java.awt.Color(225, 225, 225));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -170,6 +173,7 @@ public class GUI_Draw extends javax.swing.JFrame {
         jSlider1.setMinimum(1);
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setValue(1);
+        jSlider1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel3.setText("Stroke");
 
@@ -405,7 +409,10 @@ public class GUI_Draw extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         jButton1.setText("Undo");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -424,6 +431,7 @@ public class GUI_Draw extends javax.swing.JFrame {
         });
 
         Redo.setText("Redo");
+        Redo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Redo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RedoActionPerformed(evt);
