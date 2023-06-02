@@ -28,9 +28,10 @@ public abstract class Shapes {
         colour = c;
     }
 
-    public Shapes(Color c) {
-        colour = c;
-    }
+  //  public Shapes(Color c, int s) {
+  //      colour = c;
+  //      stroke = s;
+  //  }
     public Shapes(int x1, int x2, int y1, int y2, Color color,int stroke,boolean isfilled) {
         colour=color;
         this.x1 = x1;

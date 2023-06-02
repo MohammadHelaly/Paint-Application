@@ -19,10 +19,13 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Stack;
 
 
 import javax.swing.JPanel;
+import shapes.Brush;
 import shapes.Circle;
+import shapes.Eraser;
 import shapes.Line;
 import shapes.OddShape;
 import shapes.Rectangle;
@@ -31,7 +34,7 @@ import shapes.Square;
 import shapes.Triangle;
 /**
  *
- * @author usefw
+ * @author Helaly
  */
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
     
@@ -40,10 +43,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     public static Toolkit toolkit = Toolkit.getDefaultToolkit();
    static CurrentShapes c= CurrentShapes.Singleton();
         Color Colour = Color.BLACK;
-    String shape="Line";
+    String shape="Brush";
           public static String redotype;
           public static int resize;
            Iterator <Shapes> it=CurrentShapes.drawings.iterator();
+    public static Stack<Shapes> undo = new Stack<>();
+    public static Stack<Shapes> redo = new Stack<>();
     public ArrayList<Point> points;
     public Point previousPoint;
 
@@ -60,6 +65,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             public static Shapes Lastc;
             public static Shapes Lastt;
             public static Shapes Lasto;
+            public static Shapes Lastb;
+            public static Shapes Laste;            
     Shapes resizedshape=null;
     public  Board(){
         addMouseListener(this);
@@ -83,6 +90,36 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                 ((Graphics2D) draw).setStroke(new BasicStroke(line.getstroke()));
                 draw.drawLine(line.getx1(), line.gety1(), line.getx2(), line.gety2());
             }
+                else if(hold instanceof Brush){
+                Brush b = (Brush) hold;
+                draw.setColor(b.getColor());
+                ((Graphics2D) draw).setStroke(new BasicStroke(b.getstroke()));
+                b.xPositions.add(b.getx2());
+                b.yPositions.add(b.gety2());        
+                int arrayListSize = b.xPositions.size();
+                int[] x = new int[arrayListSize];
+                int[] y = new int[arrayListSize];
+                for (int j = 0; j < arrayListSize; j++) {
+                x[j] = b.xPositions.get(j);
+                y[j] = b.yPositions.get(j);
+                }
+                    draw.drawPolyline(x, y, arrayListSize);
+                }
+                else if(hold instanceof Eraser){
+                Eraser b = (Eraser) hold;
+                draw.setColor(Color.WHITE);
+                ((Graphics2D) draw).setStroke(new BasicStroke(b.getstroke()));
+                b.xPositions.add(b.getx2());
+                b.yPositions.add(b.gety2());        
+                int arrayListSize = b.xPositions.size();
+                int[] x = new int[arrayListSize];
+                int[] y = new int[arrayListSize];
+                for (int j = 0; j < arrayListSize; j++) {
+                x[j] = b.xPositions.get(j);
+                y[j] = b.yPositions.get(j);
+                }
+                    draw.drawPolyline(x, y, arrayListSize);
+                }
             else if(hold instanceof Rectangle ){
                 Rectangle r = (Rectangle) hold;
                 draw.setColor(r.getColor());
@@ -235,14 +272,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         try{
             
             if(!shape.isEmpty() && ! shape.equals("resize") &&! shape.equals("move") &&! shape.equals("copy") &&! shape.equals("delete") &&! shape.equals("fill")){
-             x1 = e.getX();
-        y1 = e.getY();
-        x2=e.getX();
-        y2=e.getY();
+            x1 = e.getX();
+            y1 = e.getY();
+            x2=e.getX();
+            y2=e.getY();
       
             c.addshape(shape, x1, y1, x2, y2, Colour,stroke,isfilled); // (GetClassFactory.classgetter(shape,x1,y1,x2,y2,Colour));
             repaint();
             }
+            
             if (shape.equals("copy"))
             {
                                         
@@ -373,55 +411,49 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         }
        
     }
-    public void clearLastShape()    //pop
-    {
-        int size=c.drawings.size();
+   
+    
+        public void undo() {
+      
+        //if (!undo.isEmpty()){
         try{
-        if(c.drawings.get(size-1)  instanceof Circle){
-        Lastc=c.drawings.get(size-1);
-        redotype="Circle";
+
+             // if (!undo.isEmpty()){
+                       if(!c.drawings.isEmpty()){
+            redo.push(c.drawings.get(c.drawings.size()-1));
+
+            c.removeshape();
+            repaint();
         }
-         if(c.drawings.get(size-1)  instanceof Rectangle){
-         Lastr= c.drawings.get(size-1);
-        redotype="Rectangle";
-        }
-          if(c.drawings.get(size-1)  instanceof Square){
-                Lasts=c.drawings.get(size-1);
-        redotype="Square";
-        }
-           if(c.drawings.get(size-1)  instanceof Triangle){
-                 Lastt=c.drawings.get(size-1);
-        redotype="Triangle";
-        }
-            if(c.drawings.get(size-1)  instanceof Line){
-            
-                Lastl=c.drawings.get(size-1);
-        redotype="Line";
-        }
-            if(c.drawings.get(size-1)  instanceof OddShape){
-                 Lasto=c.drawings.get(size-1);
-        redotype="OddShape";
-            }
-        
-        
-        
-        
-        if(c.drawings.size()>0){
-            c.removeshape(); 
-          
+         //  repaint();
+                    }catch(Exception ex){
             
         }
-        repaint();
-        }catch(Exception ex){
+       // }
+    }
+    
+        public void redo() {
+        try{    
+
+        if (!redo.isEmpty()) {
+
+            c.drawings.add(redo.pop());
+            undo.push(c.drawings.get(c.drawings.size()-1));
+            repaint();
+        }
+                           }catch(Exception ex){
             
         }
     }
-    public void clearAllShapes()
+        
+        
+           public void clearAllShapes()
     {
                    c.drawings.clear();
                    repaint();
     }
     
+   /* 
     public void redo(){
         try{
     if(redotype.equals("Line")){
@@ -441,6 +473,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     c.drawings.add(Lastt);
     repaint();
     }
+    if(redotype.equals("Brush")){
+    c.drawings.add(Lastb);
+    repaint();
+    } if(redotype.equals("Eraser")){
+    c.drawings.add(Laste);
+    repaint();
+    }    
     if(redotype.equals("OddShape")){
     c.drawings.add(Lasto);
     repaint();
@@ -448,10 +487,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         }catch(Exception ex) {
             
             }
-
-   
-    }
-
+    }*/
 
  
        
@@ -510,6 +546,33 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             repaint();
             condition=false;
         }
+                else if (shape.equals("Brush")) {
+            x2 = e.getX();
+            y2 = e.getY();
+            Shapes shape = c.drawings.get(c.drawings.size() - 1);
+            if (shape instanceof Brush) {
+                Brush brush = (Brush) shape;
+                brush.setx2(x2);
+                brush.sety2(y2);
+            }
+            repaint();
+            condition=false;
+        }   
+        else if (shape.equals("Eraser")) {
+            x2 = e.getX();
+            y2 = e.getY();
+            Shapes shape = c.drawings.get(c.drawings.size() - 1);
+            if (shape instanceof Eraser) {
+                Eraser eraser = (Eraser) shape;
+                //eraser.xPositions.add(x2);
+                //eraser.yPositions.add(y2);
+                eraser.setx2(x2);
+                eraser.sety2(y2);
+            }
+            repaint();
+            condition=false;
+        }  
+          
           else if (shape.equals("Square")){
               x2 = e.getX();
             y2 = e.getY();
@@ -577,7 +640,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         y1=y2;
         x1=x2;
         repaint();
-        }
+        }       
         if(resizedshape instanceof Square){
                x2 = e.getX();
             y2 = e.getY();

@@ -14,16 +14,19 @@ import java.util.ArrayList;
  * @author Helaly
  */
 public class Eraser extends Shapes{
-    public ArrayList<Integer> xcoordinates = new ArrayList<>();
-    public ArrayList<Integer> ycoordinates = new ArrayList<>();
+    public ArrayList<Integer> xPositions;
+    public ArrayList<Integer> yPositions;
 
-    public Eraser(Color c) {
-        super(c);
+    public Eraser(int x1,int x2,int y1,int y2,Color c,int stroke,boolean isfilled) {
+        super(x1,x2,y1,y2,c,stroke,isfilled);
+        xPositions = new ArrayList<>();
+        yPositions = new ArrayList<>();
     }
-
+    
     @Override
     public boolean contains(int p1, int p2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return false;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

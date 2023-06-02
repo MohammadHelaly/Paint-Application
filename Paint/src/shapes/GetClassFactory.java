@@ -26,11 +26,18 @@ public class GetClassFactory {
         else if(type.equals("Circle")){
     return new Circle(x1,x2,y1,y2,c,stroke,isfilled);
     }
-        else if(type.equals("Triangle")) {
+    else if(type.equals("Triangle")) {
         return new Triangle(x1,x2,y1,y2,c,stroke,isfilled);
-        }
-        else
-        {
-            return new OddShape(x1,x2,y1,y2,c,stroke,isfilled);
-        }
-    }}
+    }
+    else if(type.equals("Eraser")) {
+        return new Eraser(x1,x2,y1,y2,c,stroke,isfilled);
+    }
+    else if(type.equals("Brush")) {
+        return new Brush(x1,x2,y1,y2,c,stroke,isfilled);
+    }  
+    else{
+    
+        return new OddShape(x1,x2,y1,y2,c,stroke,isfilled);
+    }
+    }
+}

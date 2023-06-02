@@ -472,7 +472,7 @@ public class GUI_Draw extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       myboard.clearLastShape();
+       myboard.undo();
         myboard.resize=60;
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -551,13 +551,13 @@ public class GUI_Draw extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
         myboard.resizedshape=null;
-        myboard.shape="brush";
+        myboard.shape="Brush";
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         myboard.resizedshape=null;
-        myboard.shape="eraser";
+        myboard.shape="Eraser";
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
