@@ -6,6 +6,13 @@
 package draw;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Random;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +29,28 @@ public class GUI_Draw extends javax.swing.JFrame {
         initComponents();
         
     }
-
+    
+    private static String generateRandomNumber() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(90000) + 10000; // Generates a random 5-digit number
+        return String.valueOf(randomNumber);
+    }
+    
+    private static BufferedImage getScreenshot(Component com){
+        BufferedImage im = new BufferedImage(com.getWidth(),com.getHeight(),BufferedImage.TYPE_INT_RGB);
+        com.paint(im.getGraphics());
+        return im;
+    }
+  
+        public void saveScreenshot(Component com) throws Exception {
+            BufferedImage img = getScreenshot(com);
+            String newFileName = "Paintings/Painting" + "-" + generateRandomNumber() + ".png";
+            ImageIO.write(img, "PNG", new File(newFileName));
+            //Dimension screenDims = Board.toolkit.getScreenSize();
+            //Rectangle rect = new Rectangle(0, 0, screenDims.width, screenDims.height);
+            //BufferedImage screenshot = robot.createScreenCapture(rect);
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -446,7 +474,7 @@ public class GUI_Draw extends javax.swing.JFrame {
         );
         myboardLayout.setVerticalGroup(
             myboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
+            .addGap(0, 357, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -464,8 +492,7 @@ public class GUI_Draw extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(myboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(myboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -562,9 +589,13 @@ public class GUI_Draw extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-Screenshotter screenshotter = Screenshotter.createScreenshotter();
-screenshotter.captureScreenshot();
-JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.WARNING_MESSAGE);
+       try{
+       saveScreenshot(myboard);
+       JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.INFORMATION_MESSAGE);
+       }catch(Exception e){} 
+//Screenshotter screenshotter = Screenshotter.createScreenshotter();
+//screenshotter.captureScreenshot();
+//JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
