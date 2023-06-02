@@ -16,8 +16,8 @@ import java.awt.Point;
  * @author usefw
  */
 public class Rectangle extends Shapes{
-    public Rectangle(int x1,int x2,int y1,int y2,Color c){
-  super(x1,x2,y1,y2,c);
+    public Rectangle(int x1,int x2,int y1,int y2,Color c,int stroke,boolean isfilled){
+  super(x1,x2,y1,y2,c,stroke,isfilled);
   }
 
     @Override

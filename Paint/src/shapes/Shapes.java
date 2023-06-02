@@ -16,7 +16,9 @@ public abstract class Shapes {
       int x1;
       int x2;
       int y1;
-        int y2;
+      int y2;
+      int stroke;
+      boolean isfilled;
 
     public Color getColor() {
         return colour;
@@ -29,12 +31,14 @@ public abstract class Shapes {
     public Shapes(Color c) {
         colour = c;
     }
-    public Shapes(int x1, int x2, int y1, int y2, Color color) {
+    public Shapes(int x1, int x2, int y1, int y2, Color color,int stroke,boolean isfilled) {
         colour=color;
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
+        this.stroke=stroke;
+        this.isfilled=isfilled;
     }
 
     public int getx1() {
@@ -68,5 +72,22 @@ public abstract class Shapes {
     public void sety2(int y2) {
         this.y2 = y2;
     }
+    
+    public void setstroke(int stroke) {
+        this.stroke = stroke;
+    }
+
+    public int getstroke() {
+        return stroke;
+    }
+    
+    public boolean isFilled() {
+        return isfilled;
+    }
+
+    public void setfilled(boolean filled) {
+        isfilled = filled;
+    }
+    
      public abstract boolean contains(int p1,int p2);
 }

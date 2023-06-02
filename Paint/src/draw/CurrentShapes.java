@@ -27,13 +27,26 @@ public  class CurrentShapes implements Subject{
              return s;
              
              }
-    public void  addshape(String shape,int x1,int y1,int x2,int y2,Color Colour){
-   drawings.add(GetClassFactory.classgetter(shape,x1,x2,y1,y2,Colour));
+    @Override         
+    public void  addshape(String shape,int x1,int y1,int x2,int y2,Color Colour,int stroke,boolean isfilled){
+   drawings.add(GetClassFactory.classgetter(shape,x1,x2,y1,y2,Colour,stroke,isfilled));
    
 }
      public  void removeshape(){
      drawings.remove(drawings.size()-1);
      }
+
+    /**
+     *
+     * @param shape
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param Colour
+     * @param stroke
+     * @param isfilled
+     */
 
    
    
