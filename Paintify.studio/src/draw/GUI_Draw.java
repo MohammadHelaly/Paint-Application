@@ -28,6 +28,7 @@ public class GUI_Draw extends javax.swing.JFrame {
     public GUI_Draw() {
 
         initComponents();
+
                                 setExtendedState(GUI_Draw.MAXIMIZED_BOTH);
         
     }
@@ -1082,7 +1083,9 @@ myboard.Colour=Color.CYAN;
         // TODO add your handling code here:
                try{
        saveScreenshot(myboard);
-       JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.INFORMATION_MESSAGE);
+        Screenshot s = new Screenshot();
+        s.setVisible(true);
+      // JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.INFORMATION_MESSAGE);
        }catch(Exception e){} 
     }//GEN-LAST:event_jLabel9MouseClicked
 
@@ -1090,7 +1093,9 @@ myboard.Colour=Color.CYAN;
         // TODO add your handling code here:
                try{
        saveScreenshot(myboard);
-       JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.INFORMATION_MESSAGE);
+       Screenshot s = new Screenshot();
+        s.setVisible(true);
+       //JOptionPane.showMessageDialog(null, "Screenshot saved!", "Screenshot", JOptionPane.INFORMATION_MESSAGE);
        }catch(Exception e){} 
     }//GEN-LAST:event_jPanel6MouseClicked
 
