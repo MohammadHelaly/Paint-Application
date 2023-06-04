@@ -15,8 +15,7 @@
  - Use the toolbar on the right-hand side of the application to select your desired tool and customize your drawing options.
  - Draw on the canvas area in the middle of the application.
 ## Future Improvements:
- - Better looking GUI
- - Exporting drawings
+ - Filling app about page
  - Adding UML diagrams to repository
  - Adding Screenshots to repository
 ## Contributors:
