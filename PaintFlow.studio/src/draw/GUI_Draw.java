@@ -47,6 +47,10 @@ public class GUI_Draw extends javax.swing.JFrame {
   
         public void saveScreenshot(Component com) throws Exception {
             BufferedImage img = getScreenshot(com);
+                    File paintingsDir = new File("Paintings");
+        if (!paintingsDir.exists()) {
+            paintingsDir.mkdir();
+        }
             String newFileName = "Paintings/Painting" + "-" + generateRandomNumber() + ".png";
             ImageIO.write(img, "PNG", new File(newFileName));
             //Dimension screenDims = Board.toolkit.getScreenSize();
