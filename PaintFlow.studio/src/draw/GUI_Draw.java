@@ -123,7 +123,7 @@ public class GUI_Draw extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
 
-        jPanel1.setBackground(new java.awt.Color(93, 36, 48));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jSeparator2.setBackground(new java.awt.Color(245, 245, 245));

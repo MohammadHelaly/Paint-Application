@@ -16,19 +16,19 @@ import java.io.IOException;
 public class Instructions extends javax.swing.JFrame {
 
     /**
-     * Creates new form instuctions
+     * Creates new form Instuctions
      */
     public Instructions() {
 
         initComponents();
         setExtendedState(Instructions.MAXIMIZED_BOTH);
         jScrollPane1.setOpaque(false);
-        jScrollPane1.setBackground(new Color(93,36,48));
+        jScrollPane1.setBackground(new Color(51,51,51));
         jScrollPane1.setBorder(null);
         jScrollPane1.getViewport().setOpaque(false);
         jScrollPane1.setViewportBorder(null);
         jTextArea1.setOpaque(false);
-        jTextArea1.setBackground(new Color(93,36,48));
+        jTextArea1.setBackground(new Color(51,51,51));
         jTextArea1.setBorder(null);
     }
 
@@ -59,7 +59,7 @@ public class Instructions extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(93, 36, 48));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 60, 88));
@@ -224,7 +224,10 @@ public class Instructions extends javax.swing.JFrame {
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
